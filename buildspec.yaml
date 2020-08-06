@@ -10,7 +10,7 @@ phases:
   pre_build:
     commands:
       - aws cloudformation validate-template --template-body file://core.yaml
-      - cfn-lint core.yaml
+      - cfn-lint --cfn_file core.yaml
   build:
     commands:
       - aws cloudformation deploy --template-file core.yaml --stack-name corepipe --parameter-overrides VpcCidr=10.0.0.0/16,env=test
