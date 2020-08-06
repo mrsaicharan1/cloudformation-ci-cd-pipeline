@@ -1,0 +1,36 @@
+version: 0.2
+
+        
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - pip3 install awscli cfn-lint
+  pre_build:
+    commands:
+      - aws cloudformation validate-template --template-body file://core.yaml
+      - cfn-lint file://core.yaml
+  build:
+    commands:
+      - aws cloudformation deploy --template-file core.yaml --stack-name corepipe --parameter-overrides VpcCidr=10.0.0.0/16,env=test
+  # post_build:
+  #   run-as: Linux-user-name
+  #   commands:
+  #     - command
+  #     - command
+  #   finally:
+  #     - command
+  #     - command
+# reports:
+#   report-group-name-or-arn:
+#     files:
+#       - location
+#       - location
+#     base-directory: location
+#     discard-paths: no | yes
+#     file-format: report-format
+# artifacts:
+#   files:
+#     - location
+#     - location
