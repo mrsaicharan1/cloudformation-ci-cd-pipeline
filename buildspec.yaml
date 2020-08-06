@@ -13,7 +13,7 @@ phases:
       - cfn-lint --cfn_file core.yaml
   build:
     commands:
-      - aws cloudformation deploy --template-file core.yaml --stack-name corepipe --parameter-overrides VpcCidr=10.0.0.0/16,env=test
+      - aws cloudformation deploy --template-file core.yaml --stack-name corepipe --parameter-overrides VpcCidr=10.0.0.0/16,Environment=test
       - python3 core_test.py
 
   # post_build:
