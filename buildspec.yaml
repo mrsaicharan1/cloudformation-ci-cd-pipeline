@@ -7,14 +7,16 @@ phases:
       python: 3.8
     commands:
       - pip3 install awscli cfn-lint
-  pre_build:
+  build:
     commands:
       - aws cloudformation validate-template --template-body file://core.yaml
       - cfn-lint --cfn_file core.yaml
-  build:
+  post_build:
     commands:
       - aws cloudformation deploy --template-file core.yaml --stack-name corepipe --parameter-overrides VpcCidr=10.0.0.0/16 Environment=test
       - python3 core_test.py
+    finally:
+      -  aws cloudformation delete-stack --stack-name corepipe
 
   # post_build:
   #   run-as: Linux-user-name
