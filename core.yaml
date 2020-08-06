@@ -19,9 +19,6 @@ Parameters:
     Type: String
     AllowedValues: ['prod', 'test']
 
-Conditions:
-  ProdEnv: !Equals [ !Ref Environment, "prod" ]
-
 Resources:
   Vpc:
     Type: AWS::EC2::VPC
