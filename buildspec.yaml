@@ -9,7 +9,7 @@ phases:
       - pip3 install awscli cfn-lint
   pre_build:
     commands:
-      - aws cloudformation validate-template --template-body core.yaml
+      - aws cloudformation validate-template --template-body file://core.yaml
       - cfn-lint file://core.yaml
   build:
     commands:
