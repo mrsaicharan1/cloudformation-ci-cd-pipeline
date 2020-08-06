@@ -9,11 +9,13 @@ phases:
       - pip3 install awscli cfn-lint
   pre_build:
     commands:
-      - aws cloudformation validate-template --template-body file://core.yaml
+      - aws cloudformation validate-template --template-body core.yaml
       - cfn-lint file://core.yaml
   build:
     commands:
       - aws cloudformation deploy --template-file core.yaml --stack-name corepipe --parameter-overrides VpcCidr=10.0.0.0/16,env=test
+      - python3 core_test.py
+
   # post_build:
   #   run-as: Linux-user-name
   #   commands:
