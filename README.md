@@ -1,2 +1,2 @@
 # cloudformation-ci-cd-pipeline
-A template validation CI/CD pipeline for CloudFormation template validation
+A template validation CI/CD pipeline for CloudFormation Stacks
